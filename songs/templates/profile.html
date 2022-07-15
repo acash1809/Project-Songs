@@ -1,0 +1,116 @@
+
+{% extends 'navbar.html' %}
+
+{% block content %}
+{% load crispy_forms_tags %}
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+
+.side_form {
+  box-shadow: 0 6px 8px 0 rgba(0, 0, 0, 0.2);
+  max-width: 500px;
+  margin: auto;
+  text-align: left;
+  font-family: arial;
+}
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  max-width: 300px;
+  margin: auto;
+  text-align: center;
+  font-family: arial;
+}
+
+.title {
+  color: grey;
+  font-size: 18px;
+}
+
+button {
+  border: none;
+  outline: 0;
+  display: inline-block;
+  padding: 8px;
+  color: white;
+  background-color: #000;
+  text-align: center;
+  cursor: pointer;
+  width: 100%;
+  font-size: 18px;
+}
+
+n {
+  text-decoration: none;
+  font-size: 22px;
+  color: black;
+}
+
+m {
+  opacity: 1;
+  text-decoration: none;
+  font-size: 22px;
+  color: black;
+  
+  outline: 0;
+  display: block;
+  padding: 10px;
+  
+  background-color: #000;
+  
+  
+  width: 100%;
+  font-size: 18px;
+}
+</style>
+</head>
+<body>
+<m>  </m>
+<h2 style="text-align:center">User Profile</h2>
+
+<div class="card">
+
+
+  <img src="{{ user.profile.image.url }}" alt="John" style="width:50%">
+  <h1>{{ user.username }}</h1>
+  <p class="title">{{ user.profile.bio }}</p>
+  <p>{{ user.email }}h</p>
+  <div style="margin: 24px 0;">
+    <n href="#"><i class="fa fa-dribbble"></i></n> 
+    <n href="#"><i class="fa fa-twitter"></i></n>  
+    <n href="#"><i class="fa fa-linkedin"></i></n>  
+    <n href="#"><i class="fa fa-facebook"></i></n> 
+  </div>
+  <m> </m>
+</div>
+
+<p></p>
+
+
+
+<div class="side_form">
+<form method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
+      <fieldset class="form-group">
+
+        <legend class="border-bottom mb-4">Edit</legend>
+        {{ u_form|crispy }}
+        {{ p_form|crispy }}
+      </fieldset>
+      <div class="form-group">
+        <button class="btn btn-outlinne-info" type="submit">Submit</button>
+      </div>
+
+    </form>
+
+</div>
+
+</body>
+</html>
+
+{% endblock %}

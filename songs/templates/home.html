@@ -1,0 +1,55 @@
+{% extends 'navbar.html' %}
+{% load static %}
+
+
+{% block content %}
+<body>
+	<p>This is the home page!</p>
+
+
+	<div id="sidebar"  style="padding:0 100px;overflow:hidden;position: relative;top:0px"class="container-fluid">
+        <h3>Genres</h3>
+        <ul>
+            <li {% if not genre %}class="selected"{% endif %}>
+                <a href='{% url "genre_list" %}'>All</a>
+            </li>
+
+	       
+
+		{% for c in genres %}
+            <li {% if genre.slug == c.slug %}class="selected"{% endif %}>
+                <a href="{{ c.get_absolute_url }}">{{ c.name }}</a>
+            </li>
+        {% endfor %}
+            
+	
+
+</div>
+
+	<div id='main' class='music_list'>
+		<h1>{% if genre %}{{ genre.name }}{% else %}Musics{% endif %}</h1>
+
+		{%for music in musics%}
+        			<a href="{{music.get_absolute_url}}">
+                    <img src="{% if music.image %}{{ music.image.url }}{% else %}{% static 'no_image.png' %}{% endif %}"height="200">
+            </a>
+			<a href="{{music.get_absolute_url}}">
+				{{music.name}}
+			</a><br>
+
+
+		<div class="audio">	
+		<audio controls src="{{ music.audiofile.url }}" ></audio>
+			
+	</div>
+
+
+
+
+		{% endfor %}
+
+	</div>
+
+
+</body>
+{% endblock %}

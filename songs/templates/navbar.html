@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Welcome</title>
+  <meta charset="utf-8">
+  
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  
+
+  <style type="text/css">
+
+
+#sidebar {
+    width:300px;
+    padding:30px 20px 0 0;
+    float:left;
+}
+
+#sidebar ul{
+    margin:0;
+    padding:0;
+}
+
+#sidebar ul li {
+    margin:0;
+    list-style:none;
+    padding:10px 14 px;
+}
+
+#sidebar ul li a {
+    display:block;
+}
+
+#sidebar ul li.selected {
+    background:#5993bb;
+    border-radius:4px;
+}
+
+#sidebar ul li.selected a {
+    color:#fff;
+}
+
+
+#main {
+    width:220px;
+    padding:30px 20px 0 0;
+    float:left;
+}
+
+#main a {
+    display:block;
+}
+
+
+
+
+</style>
+
+
+
+
+</head>
+<body>
+	
+
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">AK-SONGS</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="{% url 'genre_list' %}">Home</a></li>
+      <li><a href="#">Page 1</a></li>
+    </ul>
+
+    <ul class="nav navbar-nav navbar-right">
+
+      {% if request.user.is_authenticated %}
+        <li><a href="{% url 'Logout' %}"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+        <li><a href="{% url 'profile' %}"><span class="glyphicon glyphicon-user"></span>{{ user.username }}</a></li>
+        
+      {% else %}
+        <li><a href="{% url 'Login' %}"><span class="glyphicon glyphicon-user"></span> Sign In</a></li>
+        <li><a href="{% url 'register' %}"><span class="glyphicon glyphicon-log-in"></span>Register</a></li>  
+
+
+
+
+      {% endif %}
+
+    </ul>
+    
+  </div>
+</nav>
+  
+  {% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-{{ message.tags }}">
+      {{ message }}
+    </div>
+    {% endfor %}
+  {% endif %}
+
+<div class="container">
+  <h3>AK-SONGS</h3>
+  
+</div>
+
+
+
+
+	{% block content %}
+
+	{% endblock %}
+
+</body>
+</html>
